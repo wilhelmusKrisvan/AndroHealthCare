@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darktosca"
     tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/btnBackLogin"
+        android:layout_width="46dp"
+        android:layout_height="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321"
+        app:srcCompat="@drawable/back" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -12,6 +25,8 @@
         android:layout_height="60sp"
         android:text="LOGIN"
         android:textSize="20sp"
+        android:background="@drawable/button"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -25,6 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Belum punya Akun? "
         android:textSize="15sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
@@ -36,9 +52,12 @@
         android:id="@+id/txtPassword"
         android:layout_width="250dp"
         android:layout_height="60sp"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -50,22 +69,27 @@
         android:id="@+id/txtRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DAFTAR DISINI"
+        android:fontFamily="@font/semiitalic"
+        android:text="Daftar disini."
+        android:textColor="@color/tosca"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="250dp"
         android:layout_height="60sp"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -83,6 +107,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintVertical_bias="0.105"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
