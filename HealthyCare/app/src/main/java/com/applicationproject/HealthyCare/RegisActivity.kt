@@ -46,7 +46,5 @@ class RegisActivity : AppCompatActivity() {
         var user = User(isiKTP.text.toString(), isiEmail.text.toString(), isiPass.text.toString(), isiUser.text.toString())
         db.child(isiKTP.text.toString()).setValue(user)
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(isiEmail.text.toString(), isiPass.text.toString())
-
-
     }
 }

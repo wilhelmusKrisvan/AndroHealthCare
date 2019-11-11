@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darktosca"
     tools:context=".BookDokActivity">
 
     <ImageView
@@ -18,4 +19,92 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.321"
         app:srcCompat="@drawable/back" />
+
+    <ImageButton
+        android:id="@+id/btnMata"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/mata"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrto5"
+        app:layout_constraintEnd_toStartOf="@+id/btnParu"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnOrto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/orto"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnParu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintStart_toEndOf="@+id/btnOrto4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <ImageButton
+        android:id="@+id/btnParu"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/paru2"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrto6"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnOrto4"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/umum"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnMata"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.839" />
+
+    <ImageButton
+        android:id="@+id/btnOrto5"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="156dp"
+        android:background="@drawable/jantung"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnOrto6"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnOrto6"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="156dp"
+        android:background="@drawable/gigi"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="176dp"
+        android:layout_height="51dp"
+        android:fontFamily="@font/semibold"
+        android:text="Spesialisasi"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnOrto4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
