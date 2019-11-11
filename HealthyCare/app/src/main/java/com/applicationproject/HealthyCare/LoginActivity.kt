@@ -22,17 +22,22 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString())
-                .addOnSuccessListener {
-                    //tampil langsung ke menu utama...
-                    Toast.makeText(baseContext, "LOGIN BERHASIL", Toast.LENGTH_LONG).show()
-                    val i:Intent = Intent()
-                    startActivity(i)
-                }
-                .addOnFailureListener {
-                    //gagal
-                    Toast.makeText(baseContext, "LOGIN GAGAL", Toast.LENGTH_LONG).show()
-                }
+            if(!txtEmail.text.toString().equals("") && !txtPassword.text.toString().equals("")){
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString())
+                    .addOnSuccessListener {
+                        //tampil langsung ke menu utama...
+                        Toast.makeText(baseContext, "LOGIN BERHASIL", Toast.LENGTH_LONG).show()
+                        val i:Intent = Intent(baseContext, HomeActivity::class.java)
+                        startActivity(i)
+                    }
+                    .addOnFailureListener {
+                        //gagal
+                        Toast.makeText(baseContext, "LOGIN GAGAL", Toast.LENGTH_LONG).show()
+                    }
+            }
+            else{
+                Toast.makeText(baseContext, "EMAIL & PASSWORD KOSONG", Toast.LENGTH_LONG).show()
+            }
         }
 
     }
