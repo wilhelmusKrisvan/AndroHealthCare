@@ -87,23 +87,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.478" />
 
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="250sp"
-        android:layout_height="60sp"
-        android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -145,5 +128,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.219"
         app:srcCompat="@drawable/back" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="250sp"
+        android:layout_height="60sp"
+        android:ems="10"
+        android:hint="Email"
+        android:backgroundTint="#FFFFFF"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.593" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

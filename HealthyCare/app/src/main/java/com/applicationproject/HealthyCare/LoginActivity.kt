@@ -22,8 +22,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            if(!txtEmail.text.toString().equals("") && !txtPassword.text.toString().equals("")){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(txtEmail.text.toString(),txtPassword.text.toString())
+            if(!txtLogEmail.text.toString().equals("") && !txtLogPassword.text.toString().equals("")){
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(txtLogEmail.text.toString(),txtLogPassword.text.toString())
                     .addOnSuccessListener {
                         //tampil langsung ke menu utama...
                         Toast.makeText(baseContext, "LOGIN BERHASIL", Toast.LENGTH_LONG).show()

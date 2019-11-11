@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "247652507198-jr9s1p9hujv4fv9omu1jrflatn91uvdg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.applicationproject.HealthyCare",
+            "certificate_hash": "12fdeb344b48ce1fae6579c45e756a03e9c8c468"
+          }
+        },
+        {
           "client_id": "247652507198-vqag8slli0ubpecep8nd86m0oqncu7qc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

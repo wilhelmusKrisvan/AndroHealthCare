@@ -6,55 +6,41 @@
     android:background="@drawable/background2"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/btnBackLogin4"
-        android:layout_width="46dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.141"
-        app:srcCompat="@drawable/back" />
-
     <ImageButton
         android:id="@+id/btnDokter"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:layout_width="125sp"
+        android:layout_height="125sp"
         android:background="@color/darktosca"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintEnd_toStartOf="@+id/btnLab"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663"
+        app:layout_constraintVertical_bias="0.641"
         app:srcCompat="@mipmap/dokter_foreground" />
 
     <ImageButton
         android:id="@+id/btnLab"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="125sp"
+        android:layout_height="125sp"
         android:background="@color/darktosca"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toEndOf="@+id/btnDokter"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663"
+        app:layout_constraintVertical_bias="0.641"
         app:srcCompat="@mipmap/lab_foreground" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="371dp"
-        android:layout_height="185dp"
+        android:layout_width="315dp"
+        android:layout_height="125sp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btnDokter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85">
+        app:layout_constraintVertical_bias="0.676">
 
         <LinearLayout
             android:layout_width="match_parent"
