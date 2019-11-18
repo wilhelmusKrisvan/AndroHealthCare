@@ -8,31 +8,32 @@
 
     <ImageButton
         android:id="@+id/btnLab"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/btnLabb"
+        android:background="@drawable/btnlabb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <ImageButton
         android:id="@+id/btnDokter"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
         android:layout_marginStart="20dp"
-        android:background="@drawable/btnDokterr"
+        android:background="@drawable/btndokterr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnLab"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="0.305"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardInit"
         android:layout_width="319dp"
         android:layout_height="191dp"
         android:orientation="vertical"
@@ -50,27 +51,32 @@
             <TextView
                 android:id="@+id/txtNoBook"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtNamaDok"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txHTgl"
+                android:id="@+id/txtTgl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtJam"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtRS"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="25sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

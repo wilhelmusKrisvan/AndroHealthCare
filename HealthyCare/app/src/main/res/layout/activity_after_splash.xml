@@ -41,14 +41,14 @@
         android:id="@+id/btnLogin"
         android:layout_width="249dp"
         android:layout_height="48dp"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/button"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -56,17 +56,17 @@
         android:id="@+id/btnRegis"
         android:layout_width="249dp"
         android:layout_height="48dp"
-        android:background="@drawable/btnLain"
+        android:background="@drawable/btnlain"
         android:text="Daftar"
         android:textAllCaps="false"
         android:textColor="@color/tosca"
         android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.483" />
 
     <ImageView
         android:id="@+id/imageView4"

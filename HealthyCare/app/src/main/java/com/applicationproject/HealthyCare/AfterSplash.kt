@@ -14,10 +14,12 @@ class AfterSplash : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val i: Intent = Intent(baseContext, LoginActivity::class.java)
             startActivity(i)
+            finish()
         }
         btnRegis.setOnClickListener {
             val i: Intent = Intent(baseContext, RegisActivity::class.java)
             startActivity(i)
+            finish()
         }
     }
 }

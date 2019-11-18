@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#00CEDC</color>
     <color name="colorPrimaryDark">#162D38</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#00CEDC</color>
 
     <color name="darktosca">#162D38</color>
     <color name="tosca">#00CEDC</color>

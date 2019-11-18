@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
 import android.view.Window
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SplashActivity : AppCompatActivity() {
@@ -17,9 +18,16 @@ class SplashActivity : AppCompatActivity() {
 
         val handler:Handler = Handler()
         handler.postDelayed(Runnable {
-            startActivity(Intent(applicationContext, AfterSplash::class.java))
-            finish()
-        }, 1000)
+//            startActivity(Intent(applicationContext, AfterSplash::class.java))
+//            finish()
+            if(FirebaseAuth.getInstance().currentUser != null){
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                finish()
+            }else{
+                startActivity(Intent(applicationContext, AfterSplash::class.java))
+                finish()
+            }
+        }, 2000)
     }
 
 }
