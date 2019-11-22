@@ -42,7 +42,6 @@ class RegisActivity : AppCompatActivity() {
         btnRegis.setOnClickListener {
             if(!txtEmail.text.toString().equals("") && !txtPass.text.toString().equals("") && !txtKTP.text.toString().equals("") &&
                     !txtUser.text.toString().equals("")){
-                progressRegis.visibility = View.VISIBLE
                 uploadImageToFirebaseStorage()
             }
             else{
@@ -70,6 +69,7 @@ class RegisActivity : AppCompatActivity() {
         var isiEmail: TextView = findViewById(R.id.txtEmail)
         var isiPass: TextView = findViewById(R.id.txtPass)
 
+        progressRegis.visibility = View.VISIBLE
         var user = User(isiKTP.text.toString(), isiUser.text.toString(), isiEmail.text.toString(), isiPass.text.toString(), link)
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(isiEmail.text.toString(), isiPass.text.toString())
         FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {

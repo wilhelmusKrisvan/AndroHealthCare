@@ -64,6 +64,7 @@ class DashboardFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             val i:Intent = Intent(activity, AfterSplash::class.java)
             startActivity(i)
+            getActivity()?.finish()
         }
         return root
         

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_regis.*
 
 class ProfileActivity : AppCompatActivity() {
     lateinit var db: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -24,11 +25,10 @@ class ProfileActivity : AppCompatActivity() {
             i.type = "image/*"
             startActivityForResult(i,0)
         }
-
-        
     }
 
     var selectPhoto: Uri? = null
+    var link: String? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
@@ -41,7 +41,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun changeData(){
-
+        
     }
 
     fun displayProfile(){
@@ -58,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
                 disUser.text = user!!.user
                 disEmail.text = user!!.email
                 disKTP.text = user!!.ktp
-                var link = user!!.img
+                link = user!!.img
                 Picasso.get().load(link).into(edtprofile_imageView)
             }
         }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp" app:cardElevation="5dp" app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/relativeList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/Imagedoc"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/dokter_foreground" />
+
+        <TextView
+            android:id="@+id/txtNamaDok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/Imagedoc"
+            android:layout_toRightOf="@+id/Imagedoc"
+            android:hint="Nama Dokter"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtJadwal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNamaDok"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/Imagedoc"
+            android:layout_toRightOf="@+id/Imagedoc"
+            android:hint="Jadwal"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtRS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtJadwal"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/Imagedoc"
+            android:layout_toRightOf="@+id/Imagedoc"
+            android:hint="Nama Rumah Sakit"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
