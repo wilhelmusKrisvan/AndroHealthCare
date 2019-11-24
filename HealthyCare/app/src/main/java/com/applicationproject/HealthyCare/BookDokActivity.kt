@@ -2,6 +2,7 @@ package com.applicationproject.HealthyCare
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import android.location.LocationListener
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_book_dok.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.io.IOException
 import java.util.*
 
@@ -27,34 +29,31 @@ class BookDokActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_dok)
-        var txtLoc: TextView = findViewById(R.id.txtCurLoc)
-        var locationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        var i: Intent = Intent(baseContext,SearchDocActivity::class.java)
+        btnUmum.setOnClickListener {
+            i.putExtra("spesialis", "umum")
+            startActivity(i)
         }
-        val locationCallback: LocationCallback = object: LocationCallback(){
-            override fun onLocationResult(loc: LocationResult?) {
-                loc?: return
-                for (location in loc.locations){
-                    var geocoder: Geocoder =Geocoder(baseContext, Locale.getDefault())
-                    var addList: MutableList<Address>? = geocoder.getFromLocation(location.latitude,location.longitude,1)
-                    txtLoc.text = addList?.get(0)?.getAddressLine(0)
-//                    Iloc = location
-//                    val myloc = LatLng(location.latitude, location.longitude)
-//                    if(marker==null){
-//                        marker = mMap.addMarker(MarkerOptions().position(myloc).title("My Location"))
-//                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myloc,16F))
-//                    }else{
-//                        marker?.position = myloc
-//                    }
-                }
-            }
+        btnOrto.setOnClickListener {
+            i.putExtra("spesialis", "orthopaedi")
+            startActivity(i)
         }
-        locationClient.requestLocationUpdates(
-            locationRequest, locationCallback, Looper.getMainLooper()
-        )
+        btnParu.setOnClickListener {
+            i.putExtra("spesialis", "paru")
+            startActivity(i)
+        }
+        btnMata.setOnClickListener {
+            i.putExtra("spesialis", "mata")
+            startActivity(i)
+        }
+        btnGigi.setOnClickListener {
+            i.putExtra("spesialis", "gigi")
+            startActivity(i)
+        }
+        btnJantung.setOnClickListener {
+            i.putExtra("spesialis", "jantung")
+            startActivity(i)
+        }
 
 
 //        var isGPS_On: Boolean = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
