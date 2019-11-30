@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.applicationproject.HealthyCare.model.Dokter
 
-class DokterAdapter(val list : ArrayList<Dokter>, val context: Context) : RecyclerView.Adapter<DokterAdapter.DokterHolder>() {
+class DokterAdapter(var list : ArrayList<Dokter>, val context: Context) : RecyclerView.Adapter<DokterAdapter.DokterHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DokterAdapter.DokterHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_card_doc, parent, false)
         return DokterHolder(view)
@@ -22,10 +22,21 @@ class DokterAdapter(val list : ArrayList<Dokter>, val context: Context) : Recycl
 
     override fun onBindViewHolder(holder: DokterAdapter.DokterHolder, position: Int) {
         val doc = list.get(position)
-//        holder.clickRelative?.setOnClickListener {
-//            var i : Intent = Intent(context, class yg dituju)
-//            context.startActivity(i)
-//        }
+        holder.txtNamaDocv?.text = doc.nama
+        holder.txtJdwlv?.text = doc.jamStart + " - " + doc.jamEnd
+        holder.txtRSv?.text = doc.rs
+        holder.clickRelative?.setOnClickListener {
+            var i : Intent = Intent(context, DokBookDetailActivity::class.java)
+            i.putExtra("duid", doc.id.toString())
+            i.putExtra("jamStart", doc.jamStart.toString())
+            i.putExtra("jamEnd", doc.jamEnd.toString())
+            context.startActivity(i)
+        }
+    }
+
+    fun filterList(filteredList: ArrayList<Dokter>){
+        list = filteredList
+        notifyDataSetChanged()
     }
 
     class DokterHolder(val view: View): RecyclerView.ViewHolder(view){

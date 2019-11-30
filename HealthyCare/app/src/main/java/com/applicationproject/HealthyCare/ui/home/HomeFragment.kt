@@ -44,34 +44,6 @@ class HomeFragment : Fragment() {
         initSet.gravity = Gravity.CENTER
         initSet.text = "ANDA BELUM BOOKING"
 
-        var txtLoc: TextView = root.findViewById(R.id.txtCurLoc)
-        var locationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.requireActivity())
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        val locationCallback: LocationCallback = object: LocationCallback(){
-            override fun onLocationResult(loc: LocationResult?) {
-                loc?: return
-                for (location in loc.locations){
-                    var geocoder: Geocoder = Geocoder(activity, Locale.getDefault())
-                    var addList: MutableList<Address>? = geocoder.getFromLocation(location.latitude,location.longitude,1)
-                    txtLoc.text = addList?.get(0)?.getAddressLine(0)
-//                    Iloc = location
-//                    val myloc = LatLng(location.latitude, location.longitude)
-//                    if(marker==null){
-//                        marker = mMap.addMarker(MarkerOptions().position(myloc).title("My Location"))
-//                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myloc,16F))
-//                    }else{
-//                        marker?.position = myloc
-//                    }
-                }
-            }
-        }
-        locationClient.requestLocationUpdates(
-            locationRequest, locationCallback, Looper.getMainLooper()
-        )
 
         val btnDoc: ImageButton = root.findViewById(R.id.btnDokter)
         btnDoc.setOnClickListener {

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DokBookDetailActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/ImagedocDtl"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/dokter_foreground" />
+
+            <TextView
+                android:id="@+id/txtNamaDokDtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/ImagedocDtl"
+                android:layout_toRightOf="@+id/ImagedocDtl"
+                android:hint="Nama Dokter"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtJadwalDtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtNamaDokDtl"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ImagedocDtl"
+                android:layout_toRightOf="@+id/ImagedocDtl"
+                android:hint="Jadwal"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtSpesialDtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtJadwalDtl"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ImagedocDtl"
+                android:layout_toRightOf="@+id/ImagedocDtl"
+                android:text="Spesialis : "
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtRSDtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSpesialDtl"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/ImagedocDtl"
+                android:layout_toRightOf="@+id/ImagedocDtl"
+                android:hint="Nama Rumah Sakit"
+                android:textColor="#FFFFFF"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/showHari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hari"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/showTanggal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tanggal"
+                android:textAlignment="center"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleWaktu"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="horizontal"
+            android:nestedScrollingEnabled="false" />
+
+    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/txtKeluh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Keluhan"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnPesan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PESAN"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+</LinearLayout>

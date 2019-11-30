@@ -26,7 +26,8 @@
             android:layout_toRightOf="@+id/Imagedoc"
             android:hint="Nama Dokter"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txtJadwal"
@@ -40,7 +41,8 @@
             android:layout_toRightOf="@+id/Imagedoc"
             android:hint="Jadwal"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textColorHint="@color/white"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/txtRS"
@@ -54,7 +56,8 @@
             android:layout_toRightOf="@+id/Imagedoc"
             android:hint="Nama Rumah Sakit"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
 
 
     </RelativeLayout>

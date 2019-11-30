@@ -5,19 +5,16 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.view.Window
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.applicationproject.HealthyCare.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_regis.*
-import java.util.*
 
 class RegisActivity : AppCompatActivity() {
     lateinit var db:DatabaseReference
@@ -42,7 +39,12 @@ class RegisActivity : AppCompatActivity() {
         btnRegis.setOnClickListener {
             if(!txtEmail.text.toString().equals("") && !txtPass.text.toString().equals("") && !txtKTP.text.toString().equals("") &&
                     !txtUser.text.toString().equals("")){
-                uploadImageToFirebaseStorage()
+                if(checkPass(txtPass.text.toString())){
+                    uploadImageToFirebaseStorage()
+                }
+                else{
+                    Toast.makeText(baseContext, "Minimal 6 karakter", Toast.LENGTH_LONG).show()
+                }
             }
             else{
                 progressRegis.visibility = View.VISIBLE
@@ -63,6 +65,13 @@ class RegisActivity : AppCompatActivity() {
         }
     }
 
+    fun checkPass(pass:String): Boolean {
+        if(pass.length<6) {
+            return false
+        }
+        return true
+    }
+
     fun isiData(link: String){
         var isiKTP: TextView = findViewById(R.id.txtKTP)
         var isiUser: TextView = findViewById(R.id.txtUser)
@@ -70,11 +79,17 @@ class RegisActivity : AppCompatActivity() {
         var isiPass: TextView = findViewById(R.id.txtPass)
 
         progressRegis.visibility = View.VISIBLE
-        var user = User(isiKTP.text.toString(), isiUser.text.toString(), isiEmail.text.toString(), isiPass.text.toString(), link)
+        var user = User(
+            isiKTP.text.toString(),
+            isiUser.text.toString(),
+            isiEmail.text.toString(),
+            isiPass.text.toString(),
+            link
+        )
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(isiEmail.text.toString(), isiPass.text.toString())
         FirebaseAuth.getInstance().currentUser?.sendEmailVerification()?.addOnSuccessListener {
-            var id: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            db.child(id).setValue(user)
+            var uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+            db.child(uid).setValue(user)
             progressRegis.visibility = View.INVISIBLE
             Toast.makeText(baseContext, "TERDAFTAR, Silahkan Verifikasi Email Anda", Toast.LENGTH_LONG).show()
             val i:Intent = Intent(baseContext, LoginActivity::class.java)
@@ -91,7 +106,7 @@ class RegisActivity : AppCompatActivity() {
             }
         }
         else{
-            val filename = UUID.randomUUID().toString()
+            val filename = FirebaseAuth.getInstance().currentUser?.uid.toString()
             val ref = FirebaseStorage.getInstance().getReference("/image/$filename")
             ref.putFile(selectPhoto!!)
                 .addOnSuccessListener {

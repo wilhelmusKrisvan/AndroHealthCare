@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchDocActivity"></activity>
+        <activity android:name=".BookDetailActivity"></activity>
+        <activity android:name=".DokBookDetailActivity" />
+        <activity android:name=".SearchDocActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".BookLabActivity" />
         <activity
