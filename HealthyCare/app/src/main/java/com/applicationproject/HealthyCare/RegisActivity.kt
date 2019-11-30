@@ -100,14 +100,11 @@ class RegisActivity : AppCompatActivity() {
 
     fun uploadImageToFirebaseStorage(){
         if(selectPhoto == null){
-            val ref = FirebaseStorage.getInstance().getReference("/image/user.png")
-            ref.downloadUrl.addOnSuccessListener {
-                isiData(it.toString())
-            }
+            Toast.makeText(baseContext, "PILIH FOTO!!!", Toast.LENGTH_LONG).show()
         }
         else{
-            val filename = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            val ref = FirebaseStorage.getInstance().getReference("/image/$filename")
+            val filename = txtEmail.text.toString()
+            val ref = FirebaseStorage.getInstance().getReference("image/$filename")
             ref.putFile(selectPhoto!!)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {

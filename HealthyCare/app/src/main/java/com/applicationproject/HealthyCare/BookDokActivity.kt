@@ -31,33 +31,33 @@ class BookDokActivity : AppCompatActivity() {
         setContentView(R.layout.activity_book_dok)
 
         var txtLoc: TextView = findViewById(R.id.txtCurLoc)
-        var locationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        val locationRequest = LocationRequest.create()?.apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        val locationCallback: LocationCallback = object: LocationCallback(){
-            override fun onLocationResult(loc: LocationResult?) {
-                loc?: return
-                for (location in loc.locations){
-                    var geocoder: Geocoder = Geocoder(baseContext, Locale.getDefault())
-                    var addList: MutableList<Address>? = geocoder.getFromLocation(location.latitude,location.longitude,1)
-                    txtLoc.text = addList?.get(0)?.thoroughfare + " " + addList?.get(0)?.featureName + ", "+ addList?.get(0)?.adminArea
-//                    Iloc = location
-//                    val myloc = LatLng(location.latitude, location.longitude)
-//                    if(marker==null){
-//                        marker = mMap.addMarker(MarkerOptions().position(myloc).title("My Location"))
-//                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myloc,16F))
-//                    }else{
-//                        marker?.position = myloc
-//                    }
-                }
-            }
-        }
-        locationClient.requestLocationUpdates(
-            locationRequest, locationCallback, Looper.getMainLooper()
-        )
+//        var locationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+//        val locationRequest = LocationRequest.create()?.apply {
+//            interval = 10000
+//            fastestInterval = 5000
+//            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//        }
+//        val locationCallback: LocationCallback = object: LocationCallback(){
+//            override fun onLocationResult(loc: LocationResult?) {
+//                loc?: return
+//                for (location in loc.locations){
+//                    var geocoder: Geocoder = Geocoder(baseContext, Locale.getDefault())
+//                    var addList: MutableList<Address>? = geocoder.getFromLocation(location.latitude,location.longitude,1)
+//                    txtLoc.text = addList?.get(0)?.thoroughfare + " " + addList?.get(0)?.featureName + ", "+ addList?.get(0)?.adminArea
+////                    Iloc = location
+////                    val myloc = LatLng(location.latitude, location.longitude)
+////                    if(marker==null){
+////                        marker = mMap.addMarker(MarkerOptions().position(myloc).title("My Location"))
+////                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myloc,16F))
+////                    }else{
+////                        marker?.position = myloc
+////                    }
+//                }
+//            }
+//        }
+//        locationClient.requestLocationUpdates(
+//            locationRequest, locationCallback, Looper.getMainLooper()
+//        )
 
         var i: Intent = Intent(baseContext,SearchDocActivity::class.java)
         btnUmum.setOnClickListener {
