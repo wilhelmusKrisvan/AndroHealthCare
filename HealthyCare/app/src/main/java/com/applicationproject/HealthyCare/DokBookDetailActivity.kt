@@ -111,7 +111,7 @@ class DokBookDetailActivity : AppCompatActivity() {
             btnPesan.setBackgroundColor(Color.rgb(22, 45, 56))
             btnPesan.isClickable = true
             btnPesan.setOnClickListener {
-                if(keluhan != null){
+                if(keluhan.text.equals("")){
                     val i: Intent = Intent(baseContext, BookDetailActivity::class.java)
                     i.putExtra("duiddet", idDoc)
                     i.putExtra("jamPick", pilihJam)

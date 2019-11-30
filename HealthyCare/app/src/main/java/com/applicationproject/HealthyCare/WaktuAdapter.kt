@@ -42,23 +42,24 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:St
                         holder.btnJam?.setBackgroundColor(Color.TRANSPARENT)
                         holder.btnJam?.isClickable = false
                     }
-                    else{
-                        if(holder.btnJam?.currentTextColor != Color.WHITE){
-                            holder.btnJam?.setOnClickListener {
-                                holder.btnJam?.setTextColor(Color.WHITE)
-                                val i: Intent = Intent("jamData")
-                                i.putExtra("jam", jam.jam)
-                                LocalBroadcastManager.getInstance(context).sendBroadcast(i)
-                            }
-                        }else{
-                            holder.btnJam?.setBackgroundColor(Color.rgb(22, 45, 56))
-                            holder.btnJam?.isClickable = false
-                        }
-                    }
+//                    else{
+//                        if(holder.btnJam?.currentTextColor != Color.WHITE){
+
+//                        }else{
+//                            holder.btnJam?.setBackgroundColor(Color.rgb(22, 45, 56))
+//                            holder.btnJam?.isClickable = false
+//                        }
+//                    }
                 }
             }
         }
         db.addValueEventListener(listener)
+        holder.btnJam?.setOnClickListener {
+            holder.btnJam?.setTextColor(Color.WHITE)
+            val i: Intent = Intent("jamData")
+            i.putExtra("jam", jam.jam)
+            LocalBroadcastManager.getInstance(context).sendBroadcast(i)
+        }
     }
 
     class WaktuHolder(val view: View): RecyclerView.ViewHolder(view){

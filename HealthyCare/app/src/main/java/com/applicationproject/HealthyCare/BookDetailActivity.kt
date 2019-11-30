@@ -17,7 +17,8 @@ import java.util.*
 class BookDetailActivity : AppCompatActivity() {
     lateinit var idDoc:String
     lateinit var db: DatabaseReference
-    lateinit var dbPesan:DatabaseReference
+    lateinit var dbBookCek: DatabaseReference
+    lateinit var dbPesan: DatabaseReference
     var cal: Calendar = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,16 +32,33 @@ class BookDetailActivity : AppCompatActivity() {
 
         btnKonfirmasi.setOnClickListener {
             progressBarPesan.visibility = View.VISIBLE
-            var buid = UUID.randomUUID().toString()
-            var pickTanggal = DateFormat.getDateInstance().format(cal.time)
-            var book = Booking(buid, pickTanggal, jam,idDoc, keluh, FirebaseAuth.getInstance().currentUser?.uid.toString())
-            dbPesan = FirebaseDatabase.getInstance().getReference("booking")
-            dbPesan.child(buid).setValue(book)
-                .addOnSuccessListener {
-                    progressBarPesan.visibility = View.INVISIBLE
-                    val i: Intent = Intent(baseContext, HomeActivity::class.java)
-                    Toast.makeText(baseContext, "Pesanan Anda Telah dibukukan", Toast.LENGTH_LONG).show()
+            db = FirebaseDatabase.getInstance().getReference("booking")
+            val listener = object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
                 }
+                override fun onDataChange(data: DataSnapshot) {
+                    val child = data.children
+                    child.forEach{
+                        val book = data.getValue(Booking::class.java)
+                        if(book!!.jam.toString().equals(jam) && book!!.uid.toString().equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                            progressBarPesan.visibility = View.INVISIBLE
+                            Toast.makeText(baseContext, "Booking Tsbrsksn Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
+                        }else{
+                            var buid = UUID.randomUUID().toString()
+                            var pickTanggal = DateFormat.getDateInstance().format(cal.time)
+                            var book = Booking(buid, pickTanggal, jam,idDoc, keluh, FirebaseAuth.getInstance().currentUser?.uid.toString())
+                            dbPesan = FirebaseDatabase.getInstance().getReference("booking")
+                            dbPesan.child(buid).setValue(book)
+                                .addOnSuccessListener {
+                                    progressBarPesan.visibility = View.INVISIBLE
+                                    val i: Intent = Intent(baseContext, HomeActivity::class.java)
+                                    Toast.makeText(baseContext, "Pesanan Anda Telah dibukukan", Toast.LENGTH_LONG).show()
+                                }
+                        }
+                    }
+                }
+            }
+            db.addValueEventListener(listener)
         }
     }
 
