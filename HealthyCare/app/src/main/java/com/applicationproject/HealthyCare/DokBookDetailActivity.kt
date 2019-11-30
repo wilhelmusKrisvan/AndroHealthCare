@@ -42,9 +42,7 @@ class DokBookDetailActivity : AppCompatActivity() {
     lateinit var time2:String
     var pilihJam:String? = null
     var cal: Calendar = Calendar.getInstance()
-    var list: ArrayList<Waktu> = ArrayList<Waktu>()
-    var waktuAdapter = WaktuAdapter(list,this)
-    var layoutManager = GridLayoutManager(this,3)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +57,9 @@ class DokBookDetailActivity : AppCompatActivity() {
             btnPesan.isClickable = false
         }
         displayDoc()
+        var list: ArrayList<Waktu> = ArrayList<Waktu>()
+        var waktuAdapter = WaktuAdapter(list,this,idDoc)
+        var layoutManager = GridLayoutManager(this,3)
         recycleWaktu.adapter = waktuAdapter
         recycleWaktu.layoutManager = layoutManager
         recycleWaktu.setHasFixedSize(true)

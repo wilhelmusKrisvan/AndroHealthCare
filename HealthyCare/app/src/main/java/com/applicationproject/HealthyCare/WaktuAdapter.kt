@@ -11,12 +11,13 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
+import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Waktu
 import com.google.firebase.database.*
 
-class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context) : RecyclerView.Adapter<WaktuAdapter.WaktuHolder>() {
+class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:String) : RecyclerView.Adapter<WaktuAdapter.WaktuHolder>() {
     lateinit var db: DatabaseReference
-
+    var duid = uid
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaktuAdapter.WaktuHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_waktu, parent, false)
         return WaktuHolder(view)
@@ -36,8 +37,8 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context) : Recycler
             override fun onDataChange(data: DataSnapshot) {
                 val child = data.children
                 child.forEach{
-                    var wkt = it.getValue(Waktu::class.java)
-                    if (wkt!!.jam.equals(jam.jam)){
+                    var wkt = it.getValue(Booking::class.java)
+                    if (wkt!!.jam.equals(jam.jam) && wkt.duid.equals(duid)){
                         holder.btnJam?.setBackgroundColor(Color.TRANSPARENT)
                         holder.btnJam?.isClickable = false
                     }
