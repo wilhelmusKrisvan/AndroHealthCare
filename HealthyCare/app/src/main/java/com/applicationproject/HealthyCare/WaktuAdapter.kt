@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Waktu
 import com.google.firebase.database.*
+import java.text.DateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:String) : RecyclerView.Adapter<WaktuAdapter.WaktuHolder>() {
     lateinit var db: DatabaseReference
     var duid = uid
+    var date: Date = Date()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaktuAdapter.WaktuHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_waktu, parent, false)
         return WaktuHolder(view)
@@ -39,7 +43,7 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:St
                 child.forEach{
                     var wkt = it.getValue(Booking::class.java)
                     if (wkt!!.jam.equals(jam.jam) && wkt.duid.equals(duid)){
-                        holder.btnJam?.setBackgroundColor(Color.TRANSPARENT)
+                        holder.btnJam?.setBackgroundColor(Color.rgb(189, 189, 189))
                         holder.btnJam?.isClickable = false
                     }
 //                    else{
@@ -54,11 +58,17 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:St
             }
         }
         db.addValueEventListener(listener)
-        holder.btnJam?.setOnClickListener {
-            holder.btnJam?.setTextColor(Color.WHITE)
-            val i: Intent = Intent("jamData")
-            i.putExtra("jam", jam.jam)
-            LocalBroadcastManager.getInstance(context).sendBroadcast(i)
+        if(jam.jam<DateFormat.getTimeInstance(DateFormat.SHORT).format(date)){
+            holder.btnJam?.setBackgroundColor(Color.rgb(189, 189, 189))
+            holder.btnJam?.isClickable = false
+        }
+        else{
+            holder.btnJam?.setOnClickListener {
+                holder.btnJam?.setTextColor(Color.WHITE)
+                val i: Intent = Intent("jamData")
+                i.putExtra("jam", jam.jam)
+                LocalBroadcastManager.getInstance(context).sendBroadcast(i)
+            }
         }
     }
 

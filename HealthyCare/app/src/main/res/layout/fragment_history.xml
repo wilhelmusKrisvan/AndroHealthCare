@@ -20,6 +20,7 @@
         app:srcCompat="@drawable/back" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleRiw"
         android:layout_width="333dp"
         android:layout_height="560dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp" app:cardElevation="5dp" app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/relativeListRiw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/ImageRiw"
+            android:layout_width="100dp"
+            android:layout_height="125dp"
+            android:src="@mipmap/dokter_foreground" />
+
+        <TextView
+            android:id="@+id/txtKeluh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/ImageRiw"
+            android:layout_toRightOf="@+id/ImageRiw"
+            android:hint="Nama Dokter"
+            android:text="Keluhan"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtNamaDokRiw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtKeluh"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/ImageRiw"
+            android:layout_toRightOf="@+id/ImageRiw"
+            android:hint="Jadwal"
+            android:text="Nama Dokter"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtJadwalRiw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNamaDokRiw"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/ImageRiw"
+            android:layout_toRightOf="@+id/ImageRiw"
+            android:hint="Nama Rumah Sakit"
+            android:text="Jadwal"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtRSRiw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtJadwalRiw"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/ImageRiw"
+            android:layout_toRightOf="@+id/ImageRiw"
+            android:hint="Nama Rumah Sakit"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
