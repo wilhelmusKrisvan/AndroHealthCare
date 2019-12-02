@@ -1,5 +1,6 @@
 package com.applicationproject.HealthyCare
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Dokter
@@ -16,6 +18,9 @@ import com.google.firebase.database.*
 
 class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var uid: String) : RecyclerView.Adapter<RiwayatAdapter.RiwayatHolder>() {
     lateinit var dbDoc: DatabaseReference
+    var idDoc: String? =null
+    var jam: String? =null
+    var keluh: String? =null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RiwayatAdapter.RiwayatHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_riwayat, parent, false)
         return RiwayatHolder(view)
@@ -29,6 +34,8 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
         val riw = list.get(position)
         holder.txtNamaKeluhan?.text = riw!!.keluhan
         holder.txtJdwl?.text = riw!!.tanggal + ", ${riw!!.jam}"
+        keluh = riw!!.keluhan
+        jam = riw!!.jam
         dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${riw!!.duid}")
         dbDoc.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -36,10 +43,19 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
 
             override fun onDataChange(p: DataSnapshot) {
                 val doc = p.getValue(Dokter::class.java)
-                holder.txtNamaDoc?.text = doc!!.nama + "($doc!!.spesialis)"
+                holder.txtNamaDoc?.text = doc!!.nama + "(${doc!!.spesialis})"
                 holder.txtRS?.text = doc!!.rs
+                idDoc = doc!!.id
             }
         })
+        holder.clickRelative?.setOnClickListener {
+            val i: Intent = Intent(context, BookDetailActivity::class.java)
+            i.putExtra("duiddet", idDoc)
+            i.putExtra("jamPick", jam)
+            i.putExtra("keluh", keluh)
+            i.putExtra("status", "0")
+            context.startActivity(i)
+        }
     }
 
 

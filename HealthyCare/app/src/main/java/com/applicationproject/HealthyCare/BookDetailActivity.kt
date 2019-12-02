@@ -26,38 +26,47 @@ class BookDetailActivity : AppCompatActivity() {
         idDoc = intent.getStringExtra("duiddet")
         var jam = intent.getStringExtra("jamPick")
         var keluh = intent.getStringExtra("keluh")
+        var stat = intent.getStringExtra("status")
         displayDoc()
         txtJamIni.text = jam
         showKeluhan.text = keluh
 
-        btnKonfirmasi.setOnClickListener {
-            progressBarPesan.visibility = View.VISIBLE
-            db = FirebaseDatabase.getInstance().getReference("booking")
-            val listener = object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                }
-                override fun onDataChange(data: DataSnapshot) {
-                    val child = data.children
-                    child.forEach{
-                        val book = data.getValue(Booking::class.java)
-                        if(book!!.jam.toString().equals(jam) && book!!.uid.toString().equals(FirebaseAuth.getInstance().currentUser!!.uid)){
-                            progressBarPesan.visibility = View.INVISIBLE
-                            Toast.makeText(baseContext, "Booking Tsbrsksn Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
+        if(stat.equals("0")){
+            btnKonfirmasi.isClickable =false
+            btnKonfirmasi.visibility = View.INVISIBLE
+        }
+        else{
+            btnKonfirmasi.setOnClickListener {
+                progressBarPesan.visibility = View.VISIBLE
+                db = FirebaseDatabase.getInstance().getReference("booking")
+                val listener = object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+                    override fun onDataChange(data: DataSnapshot) {
+                        val child = data.children
+                        child.forEach{
+                            val book = data.getValue(Booking::class.java)
+                            if(book!!.jam.toString().equals(jam) && book!!.uid.toString().equals(FirebaseAuth.getInstance().currentUser!!.uid)){
+                                progressBarPesan.visibility = View.INVISIBLE
+                                Toast.makeText(baseContext, "Booking Tsbrsksn Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
                 }
+                db.addValueEventListener(listener)
+                var buid = UUID.randomUUID().toString()
+                var pickTanggal = DateFormat.getDateInstance().format(cal.time)
+                var book = Booking(buid, pickTanggal, jam,idDoc, keluh, FirebaseAuth.getInstance().currentUser?.uid.toString())
+                dbPesan = FirebaseDatabase.getInstance().getReference("booking")
+                dbPesan.child(buid).setValue(book)
+                    .addOnSuccessListener {
+                        progressBarPesan.visibility = View.INVISIBLE
+                        val i: Intent = Intent(baseContext, HomeActivity::class.java)
+                        Toast.makeText(baseContext, "Pesanan Anda Telah dibukukan", Toast.LENGTH_LONG).show()
+                        startActivity(i)
+                        finish()
+                    }
             }
-            db.addValueEventListener(listener)
-            var buid = UUID.randomUUID().toString()
-            var pickTanggal = DateFormat.getDateInstance().format(cal.time)
-            var book = Booking(buid, pickTanggal, jam,idDoc, keluh, FirebaseAuth.getInstance().currentUser?.uid.toString())
-            dbPesan = FirebaseDatabase.getInstance().getReference("booking")
-            dbPesan.child(buid).setValue(book)
-                .addOnSuccessListener {
-                    progressBarPesan.visibility = View.INVISIBLE
-                    val i: Intent = Intent(baseContext, HomeActivity::class.java)
-                    Toast.makeText(baseContext, "Pesanan Anda Telah dibukukan", Toast.LENGTH_LONG).show()
-                }
         }
     }
 
