@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darktosca"
+    android:background="@drawable/bgboook"
     tools:context=".BookDokActivity">
 
     <ImageView
@@ -26,7 +26,7 @@
         android:layout_height="51dp"
         android:fontFamily="@font/semibold"
         android:text="Spesialisasi"
-        android:textColor="@color/white"
+        android:textColor="@color/tosca"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,8 +117,8 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="140dp"
         android:text="Current Location"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/tosca"
+        android:textColorHint="@color/tosca"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
