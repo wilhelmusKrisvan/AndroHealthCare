@@ -116,6 +116,7 @@ class DokBookDetailActivity : AppCompatActivity() {
                     i.putExtra("duiddet", idDoc)
                     i.putExtra("jamPick", pilihJam)
                     i.putExtra("keluh", keluhan.text.toString())
+                    i.putExtra("status", "1")
                     startActivity(i)
                 }
                 else{

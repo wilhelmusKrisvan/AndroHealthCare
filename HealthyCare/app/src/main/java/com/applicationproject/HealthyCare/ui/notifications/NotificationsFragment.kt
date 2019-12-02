@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.applicationproject.HealthyCare.DokterAdapter
 import com.applicationproject.HealthyCare.HomeActivity
 import com.applicationproject.HealthyCare.R
@@ -39,12 +40,13 @@ class NotificationsFragment : Fragment() {
 //            textView.text = it
 //        })
         lateinit var db: DatabaseReference
+        var recycRiw : RecyclerView = root.findViewById(R.id.recycleRiw)
         var list: ArrayList<Booking> = ArrayList<Booking>()
-        var riwayatAdapter = RiwayatAdapter(list, context, FirebaseAuth.getInstance().uid.toString())
-        var layoutManager = LinearLayoutManager(context)
-        recycleRiw.adapter = riwayatAdapter
-        recycleRiw.layoutManager = LinearLayoutManager(context)
-        recycleRiw.setHasFixedSize(true)
+        var riwayatAdapter = RiwayatAdapter(list, root.context, FirebaseAuth.getInstance().uid.toString())
+        var layoutManager = LinearLayoutManager(root.context)
+        recycRiw.adapter = riwayatAdapter
+        recycRiw.layoutManager = LinearLayoutManager(root.context)
+        recycRiw.setHasFixedSize(true)
 
         db = FirebaseDatabase.getInstance().getReference("riwayat")
         val listener = object : ValueEventListener {
@@ -59,6 +61,7 @@ class NotificationsFragment : Fragment() {
                         list.add(riw)
                     }
                 }
+                riwayatAdapter.notifyDataSetChanged()
             }
         }
         db.addValueEventListener(listener)

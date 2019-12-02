@@ -1,34 +1,19 @@
 package com.applicationproject.HealthyCare.ui.home
 
 import android.content.Intent
-import android.graphics.Paint
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
-import android.os.Looper
-import android.text.Layout
-import android.text.style.AlignmentSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.applicationproject.HealthyCare.BookDokActivity
-import com.applicationproject.HealthyCare.HomeActivity
 import com.applicationproject.HealthyCare.R
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Dokter
-import com.google.android.gms.location.*
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_bottmenubar.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.DateFormat
 import java.util.*
 
@@ -45,12 +30,16 @@ class HomeFragment : Fragment() {
         var list: ArrayList<Booking> = ArrayList<Booking>()
         var listTampil: ArrayList<Booking> = ArrayList<Booking>()
         var db:DatabaseReference
+        var dbDoc: DatabaseReference
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val tgl: TextView = root.findViewById(R.id.txtTgl)
         val nobook: TextView = root.findViewById(R.id.txtNoBook)
-        val jam: TextView = root.findViewById(R.id.txtJam)
+        val keluh: TextView = root.findViewById(R.id.txtKeluhLook)
+        val nama: TextView = root.findViewById(R.id.txtNamaDok)
+        val rs: TextView = root.findViewById(R.id.txtRS)
         checkData()
         db = FirebaseDatabase.getInstance().getReference("booking")
+
         val listener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -62,8 +51,20 @@ class HomeFragment : Fragment() {
                 }
                 if(list.size >0){
                     nobook.text = list.get(0).buid
-                    tgl.text = list.get(0).keluhan
-                    jam.text = list.get(0).jam
+                    tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
+                    keluh.text = list.get(0).keluhan
+                    dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${list.get(0).duid}")
+                    dbDoc.addValueEventListener(object : ValueEventListener{
+                        override fun onCancelled(p0: DatabaseError) {
+
+                        }
+
+                        override fun onDataChange(p: DataSnapshot) {
+                            val doc = p.getValue(Dokter::class.java)
+                            nama.text= doc!!.nama
+                            rs.text = doc!!.rs
+                        }
+                    })
                 }else{
                     val initSet: TextView = root.findViewById(R.id.txtTgl)
                     initSet.textSize = 30F
@@ -74,9 +75,6 @@ class HomeFragment : Fragment() {
 
         }
         db.orderByChild("jam").addValueEventListener(listener)
-
-
-
 
         val btnDoc: ImageButton = root.findViewById(R.id.btnDokter)
         btnDoc.setOnClickListener {
