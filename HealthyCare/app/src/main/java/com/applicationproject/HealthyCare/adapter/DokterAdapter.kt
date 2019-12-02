@@ -1,4 +1,4 @@
-package com.applicationproject.HealthyCare
+package com.applicationproject.HealthyCare.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.applicationproject.HealthyCare.DokBookDetailActivity
+import com.applicationproject.HealthyCare.R
 import com.applicationproject.HealthyCare.model.Dokter
 
 class DokterAdapter(var list : ArrayList<Dokter>, val context: Context) : RecyclerView.Adapter<DokterAdapter.DokterHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DokterAdapter.DokterHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DokterHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_card_doc, parent, false)
         return DokterHolder(view)
     }
@@ -20,7 +22,7 @@ class DokterAdapter(var list : ArrayList<Dokter>, val context: Context) : Recycl
         return list.size
     }
 
-    override fun onBindViewHolder(holder: DokterAdapter.DokterHolder, position: Int) {
+    override fun onBindViewHolder(holder: DokterHolder, position: Int) {
         val doc = list.get(position)
         holder.txtNamaDocv?.text = doc.nama
         holder.txtJdwlv?.text = doc.jamStart + " - " + doc.jamEnd

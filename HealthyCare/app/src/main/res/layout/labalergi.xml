@@ -100,7 +100,7 @@
         android:layout_height="46dp"
         android:layout_marginEnd="65dp"
         android:background="@color/tosca"
-        android:text="@android:string/ok"
+        android:text="PICK"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/txtJam"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"

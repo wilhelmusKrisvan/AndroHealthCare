@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
                             rs.text = doc!!.rs
                         }
                     })
-                }else if(list.size >0 && list.get(0).status.equals("1")){
+                }else if(list.size >0 && list.get(0).status.equals("1") && list.get(0).tanggal.equals(DateFormat.getDateInstance(DateFormat.SHORT).format(Date()))){
                     nobook.text = list.get(0).buid
                     tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
                     keluh.text = list.get(0).keluhan
@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
                     val initSet: TextView = root.findViewById(R.id.txtTgl)
                     initSet.textSize = 30F
                     initSet.gravity = Gravity.CENTER
-                    initSet.text = "ANDA BELUM BOOKING"
+                    initSet.text = "BELUM ADA JADWAL HARI INI"
                 }
             }
 

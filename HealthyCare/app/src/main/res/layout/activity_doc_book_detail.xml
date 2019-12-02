@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgboook"
     android:orientation="vertical"
     tools:context=".DokBookDetailActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -87,9 +87,20 @@
 
     </androidx.cardview.widget.CardView>
 
+    <EditText
+        android:id="@+id/txtKeluh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Keluhan"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        android:textColorHint="@android:color/darker_gray" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorPrimary">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,24 +129,17 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="250dp"
+        app:cardBackgroundColor="@android:color/transparent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleWaktu"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:orientation="horizontal"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal" />
 
     </androidx.cardview.widget.CardView>
-
-    <EditText
-        android:id="@+id/txtKeluh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Keluhan"
-        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btnPesan"

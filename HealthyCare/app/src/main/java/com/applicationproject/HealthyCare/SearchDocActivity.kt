@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.applicationproject.HealthyCare.adapter.DokterAdapter
 import com.applicationproject.HealthyCare.model.Dokter
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_search_doc.*
 
 class SearchDocActivity : AppCompatActivity() {
     var list: ArrayList<Dokter> = ArrayList<Dokter>()
-    var dokterAdapter = DokterAdapter(list,this)
+    var dokterAdapter = DokterAdapter(list, this)
     var layoutManager = LinearLayoutManager(this)
     lateinit var spesialis: String
     lateinit var db: DatabaseReference

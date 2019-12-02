@@ -1,4 +1,4 @@
-package com.applicationproject.HealthyCare
+package com.applicationproject.HealthyCare.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
+import com.applicationproject.HealthyCare.R
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Waktu
 import com.google.firebase.database.*
@@ -22,7 +21,7 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:St
     lateinit var db: DatabaseReference
     var duid = uid
     var date: Date = Date()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaktuAdapter.WaktuHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaktuHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_waktu, parent, false)
         return WaktuHolder(view)
     }
@@ -31,7 +30,7 @@ class WaktuAdapter(var list : ArrayList<Waktu>, val context: Context, val uid:St
         return list.size
     }
 
-    override fun onBindViewHolder(holder: WaktuAdapter.WaktuHolder, position: Int) {
+    override fun onBindViewHolder(holder: WaktuHolder, position: Int) {
         val jam = list.get(position)
         holder.btnJam?.text = jam.jam
         db = FirebaseDatabase.getInstance().getReference("booking")

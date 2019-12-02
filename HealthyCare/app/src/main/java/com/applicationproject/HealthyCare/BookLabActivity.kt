@@ -72,6 +72,7 @@ class BookLabActivity : AppCompatActivity() {
                             i.putExtra("jam", jam)
                             i.putExtra("nama", nama)
                             i.putExtra("lid", id)
+                            i.putExtra("status", "0")
                             startActivity(i)
                         }
                     }
@@ -81,26 +82,27 @@ class BookLabActivity : AppCompatActivity() {
         }
 
         imgAlergi.setOnClickListener {
-//            val i : Intent= Intent(baseContext, AlergiActivity::class.java)
-//            db = FirebaseDatabase.getInstance().getReference("lab")
-//            db.addValueEventListener(object : ValueEventListener{
-//                override fun onCancelled(p0: DatabaseError) {
-//
-//                }
-//
-//                override fun onDataChange(p0: DataSnapshot) {
-//                    val child = p0.children
-//                    child.forEach{
-//                        var lab =  it.getValue(Lab::class.java)
-//                        if (lab!!.nama.toString().equals("Uji Saring Alergi")){
-//                            i.putExtra("jam", lab!!.jamStart)
-//                            i.putExtra("nama", lab!!.nama)
-//                            i.putExtra("lid", lab!!.lid)
-//                        }
-//                    }
-//                }
-//            })
-//            startActivity(i)
+            val i : Intent= Intent(baseContext, AlergiActivity::class.java)
+            db = FirebaseDatabase.getInstance().getReference("lab")
+            db.addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    val child = p0.children
+                    child.forEach{
+                        var lab =  it.getValue(Lab::class.java)
+                        if (lab!!.nama.toString().equals("Uji Saring Alergi")){
+                            i.putExtra("jam", lab!!.jamStart)
+                            i.putExtra("nama", lab!!.nama)
+                            i.putExtra("lid", lab!!.lid)
+                            i.putExtra("status", "0")
+                            startActivity(i)
+                        }
+                    }
+                }
+            })
         }
     }
 }

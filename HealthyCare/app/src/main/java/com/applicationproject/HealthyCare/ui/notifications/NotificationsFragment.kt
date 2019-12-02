@@ -1,27 +1,17 @@
 package com.applicationproject.HealthyCare.ui.notifications
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.applicationproject.HealthyCare.DokterAdapter
-import com.applicationproject.HealthyCare.HomeActivity
 import com.applicationproject.HealthyCare.R
-import com.applicationproject.HealthyCare.RiwayatAdapter
+import com.applicationproject.HealthyCare.adapter.RiwayatAdapter
 import com.applicationproject.HealthyCare.model.Booking
-import com.applicationproject.HealthyCare.model.Dokter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_search_doc.*
-import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 class NotificationsFragment : Fragment() {
 
@@ -42,7 +32,11 @@ class NotificationsFragment : Fragment() {
         lateinit var db: DatabaseReference
         var recycRiw : RecyclerView = root.findViewById(R.id.recycleRiw)
         var list: ArrayList<Booking> = ArrayList<Booking>()
-        var riwayatAdapter = RiwayatAdapter(list, root.context, FirebaseAuth.getInstance().uid.toString())
+        var riwayatAdapter = RiwayatAdapter(
+            list,
+            root.context,
+            FirebaseAuth.getInstance().uid.toString()
+        )
         var layoutManager = LinearLayoutManager(root.context)
         recycRiw.adapter = riwayatAdapter
         recycRiw.layoutManager = LinearLayoutManager(root.context)

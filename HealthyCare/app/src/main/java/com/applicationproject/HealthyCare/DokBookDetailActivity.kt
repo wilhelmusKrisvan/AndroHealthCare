@@ -3,35 +3,22 @@ package com.applicationproject.HealthyCare
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.applicationproject.HealthyCare.model.Dokter
-import com.applicationproject.HealthyCare.model.User
 import com.applicationproject.HealthyCare.model.Waktu
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_doc_book_detail.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_search_doc.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.Month
-import java.time.Year
 import java.util.*
 import android.widget.Toast
 import android.content.Intent
 import android.content.IntentFilter
-import android.view.View
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
-import com.applicationproject.HealthyCare.model.Booking
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_book_detail.*
+import com.applicationproject.HealthyCare.adapter.WaktuAdapter
 
 
 class DokBookDetailActivity : AppCompatActivity() {
@@ -55,10 +42,12 @@ class DokBookDetailActivity : AppCompatActivity() {
         if(pilihJam == null){
             btnPesan.setBackgroundColor(Color.TRANSPARENT)
             btnPesan.isClickable = false
+            btnPesan.setTextColor(Color.TRANSPARENT)
         }
         displayDoc()
         var list: ArrayList<Waktu> = ArrayList<Waktu>()
-        var waktuAdapter = WaktuAdapter(list,this,idDoc)
+        var waktuAdapter =
+            WaktuAdapter(list, this, idDoc)
         var layoutManager = GridLayoutManager(this,3)
         recycleWaktu.adapter = waktuAdapter
         recycleWaktu.layoutManager = layoutManager
@@ -110,17 +99,18 @@ class DokBookDetailActivity : AppCompatActivity() {
             pilihJam = intent!!.getStringExtra("jam")
             btnPesan.setBackgroundColor(Color.rgb(22, 45, 56))
             btnPesan.isClickable = true
+            btnPesan.setTextColor(Color.WHITE)
             btnPesan.setOnClickListener {
-                if(!keluhan.text.equals("")){
+                if(keluhan.text.equals("")){
+                    Toast.makeText(baseContext, "Isikan Keluhan Anda", Toast.LENGTH_LONG).show()
+                }
+                else{
                     val i: Intent = Intent(baseContext, BookDetailActivity::class.java)
                     i.putExtra("duiddet", idDoc)
                     i.putExtra("jamPick", pilihJam)
                     i.putExtra("keluh", keluhan.text.toString())
                     i.putExtra("status", "1")
                     startActivity(i)
-                }
-                else{
-                    Toast.makeText(baseContext, "Isikan Keluhan Anda", Toast.LENGTH_LONG).show()
                 }
             }
         }
