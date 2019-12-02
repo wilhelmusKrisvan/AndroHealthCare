@@ -27,15 +27,16 @@ class BookDetailActivity : AppCompatActivity() {
         var jam = intent.getStringExtra("jamPick")
         var keluh = intent.getStringExtra("keluh")
         var stat = intent.getStringExtra("status")
-        displayDoc()
         txtJamIni.text = jam
         showKeluhan.text = keluh
 
         if(stat.equals("0")){
+            displayDocRiw()
             btnKonfirmasi.isClickable =false
             btnKonfirmasi.visibility = View.INVISIBLE
         }
         else{
+            displayDoc()
             btnKonfirmasi.setOnClickListener {
                 progressBarPesan.visibility = View.VISIBLE
                 db = FirebaseDatabase.getInstance().getReference("booking")
@@ -91,5 +92,28 @@ class BookDetailActivity : AppCompatActivity() {
         }
         db.addValueEventListener(listener)
         tanggal.text = DateFormat.getDateInstance(DateFormat.FULL).format(cal.time)
+    }
+
+    fun displayDocRiw(){
+        db = FirebaseDatabase.getInstance().getReference("dokter/$idDoc")
+        var nama_doc: TextView = findViewById(R.id.txtNamaDokDtlIni)
+        var jdwl_doc: TextView = findViewById(R.id.txtJadwalDtlIni)
+        var spesial_doc: TextView = findViewById(R.id.txtSpesialDtlIni)
+        var rs_doc: TextView = findViewById(R.id.txtRSDtlIni)
+        var hari: TextView = findViewById(R.id.showHariIni)
+        var tanggal: TextView = findViewById(R.id.showTanggalIni)
+        val listener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+            override fun onDataChange(data: DataSnapshot) {
+                val doc = data.getValue(Dokter::class.java)
+                nama_doc.text = doc!!.nama
+                jdwl_doc.text = doc!!.jamStart + " - " + doc!!.jamEnd
+                spesial_doc.text = doc!!.spesialis
+                rs_doc.text = doc!!.rs
+            }
+        }
+        db.addValueEventListener(listener)
+        tanggal.text = intent.getStringExtra("tgl")
     }
 }

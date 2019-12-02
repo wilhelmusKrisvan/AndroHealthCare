@@ -24,7 +24,7 @@
             android:layout_marginLeft="20dp"
             android:layout_toEndOf="@+id/ImageRiw"
             android:layout_toRightOf="@+id/ImageRiw"
-            android:hint="Nama Dokter"
+            android:hint="~none~"
             android:text="Keluhan"
             android:textColor="#FFFFFF"
             android:textColorHint="@color/white"

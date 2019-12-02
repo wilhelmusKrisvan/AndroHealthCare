@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
                 }
                 if(list.size >0){
                     nobook.text = list.get(0).buid
-                    tgl.text = list.get(0).tanggal + ": ${list.get(0).jam}"
+                    tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
                     keluh.text = list.get(0).keluhan
                     dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${list.get(0).duid}")
                     dbDoc.addValueEventListener(object : ValueEventListener{

@@ -33,9 +33,7 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
     override fun onBindViewHolder(holder: RiwayatAdapter.RiwayatHolder, position: Int) {
         val riw = list.get(position)
         holder.txtNamaKeluhan?.text = riw!!.keluhan
-        holder.txtJdwl?.text = riw!!.tanggal + ", ${riw!!.jam}"
-        keluh = riw!!.keluhan
-        jam = riw!!.jam
+        holder.txtJdwl?.text = riw!!.tanggal + " jam ${riw!!.jam}"
         dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${riw!!.duid}")
         dbDoc.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -45,14 +43,14 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
                 val doc = p.getValue(Dokter::class.java)
                 holder.txtNamaDoc?.text = doc!!.nama + "(${doc!!.spesialis})"
                 holder.txtRS?.text = doc!!.rs
-                idDoc = doc!!.id
             }
         })
         holder.clickRelative?.setOnClickListener {
             val i: Intent = Intent(context, BookDetailActivity::class.java)
-            i.putExtra("duiddet", idDoc)
-            i.putExtra("jamPick", jam)
-            i.putExtra("keluh", keluh)
+            i.putExtra("duiddet", riw!!.duid)
+            i.putExtra("jamPick", riw!!.jam)
+            i.putExtra("keluh", riw!!.keluhan)
+            i.putExtra("tgl", riw!!.tanggal)
             i.putExtra("status", "0")
             context.startActivity(i)
         }
