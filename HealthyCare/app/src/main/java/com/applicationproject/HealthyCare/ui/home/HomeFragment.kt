@@ -10,9 +10,11 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.applicationproject.HealthyCare.BookDokActivity
+import com.applicationproject.HealthyCare.BookLabActivity
 import com.applicationproject.HealthyCare.R
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Dokter
+import com.applicationproject.HealthyCare.model.Lab
 import com.google.firebase.database.*
 import java.text.DateFormat
 import java.util.*
@@ -49,20 +51,31 @@ class HomeFragment : Fragment() {
                     val book = it.getValue(Booking::class.java)
                     list.add(book!!)
                 }
-                if(list.size >0){
+                if(list.size >0 && list.get(0).status.equals("0")){
                     nobook.text = list.get(0).buid
                     tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
                     keluh.text = list.get(0).keluhan
                     dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${list.get(0).duid}")
                     dbDoc.addValueEventListener(object : ValueEventListener{
                         override fun onCancelled(p0: DatabaseError) {
-
                         }
-
                         override fun onDataChange(p: DataSnapshot) {
                             val doc = p.getValue(Dokter::class.java)
                             nama.text= doc!!.nama
                             rs.text = doc!!.rs
+                        }
+                    })
+                }else if(list.size >0 && list.get(0).status.equals("1")){
+                    nobook.text = list.get(0).buid
+                    tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
+                    keluh.text = list.get(0).keluhan
+                    dbDoc = FirebaseDatabase.getInstance().getReference("lab/${list.get(0).duid}")
+                    dbDoc.addValueEventListener(object : ValueEventListener{
+                        override fun onCancelled(p0: DatabaseError) {
+                        }
+                        override fun onDataChange(p: DataSnapshot) {
+                            val lab = p.getValue(Lab::class.java)
+                            nama.text= lab!!.nama
                         }
                     })
                 }else{
@@ -79,6 +92,12 @@ class HomeFragment : Fragment() {
         val btnDoc: ImageButton = root.findViewById(R.id.btnDokter)
         btnDoc.setOnClickListener {
             val i: Intent = Intent(activity, BookDokActivity::class.java)
+            startActivity(i)
+        }
+
+        val btnLab: ImageButton = root.findViewById(R.id.btnLab)
+        btnLab.setOnClickListener {
+            val i: Intent = Intent(activity, BookLabActivity::class.java)
             startActivity(i)
         }
 
@@ -99,7 +118,11 @@ class HomeFragment : Fragment() {
                 val child = data.children
                 child.forEach {
                     val book = it.getValue(Booking::class.java)
-                    if(book!!.jam <= DateFormat.getTimeInstance(DateFormat.SHORT).format(date)){
+                    if(book!!.jam <= DateFormat.getTimeInstance(DateFormat.SHORT).format(date) && book!!.status.equals("0")){
+                        dbRiwayat.child(book.buid).setValue(book)
+                        db.child(book.buid).removeValue()
+                    }
+                    else if(book!!.jam <= DateFormat.getTimeInstance(DateFormat.SHORT).format(date) && book!!.tanggal<=DateFormat.getDateInstance(DateFormat.SHORT).format(date) && book!!.status.equals("1")){
                         dbRiwayat.child(book.buid).setValue(book)
                         db.child(book.buid).removeValue()
                     }

@@ -17,7 +17,6 @@ import java.util.*
 class BookDetailActivity : AppCompatActivity() {
     lateinit var idDoc:String
     lateinit var db: DatabaseReference
-    lateinit var dbBookCek: DatabaseReference
     lateinit var dbPesan: DatabaseReference
     var cal: Calendar = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +48,7 @@ class BookDetailActivity : AppCompatActivity() {
                             val book = data.getValue(Booking::class.java)
                             if(book!!.jam.toString().equals(jam) && book!!.uid.toString().equals(FirebaseAuth.getInstance().currentUser!!.uid)){
                                 progressBarPesan.visibility = View.INVISIBLE
-                                Toast.makeText(baseContext, "Booking Tsbrsksn Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
+                                Toast.makeText(baseContext, "Booking Tabrakan Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
                             }
                         }
                     }

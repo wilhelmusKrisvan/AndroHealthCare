@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Dokter
+import com.applicationproject.HealthyCare.model.Lab
 import com.google.firebase.database.*
 
 
@@ -34,25 +35,27 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
         val riw = list.get(position)
         holder.txtNamaKeluhan?.text = riw!!.keluhan
         holder.txtJdwl?.text = riw!!.tanggal + " jam ${riw!!.jam}"
-        dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${riw!!.duid}")
-        dbDoc.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
+        if (riw!!.status.equals("0")){
+            dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${riw!!.duid}")
+            dbDoc.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
 
-            override fun onDataChange(p: DataSnapshot) {
-                val doc = p.getValue(Dokter::class.java)
-                holder.txtNamaDoc?.text = doc!!.nama + "(${doc!!.spesialis})"
-                holder.txtRS?.text = doc!!.rs
+                override fun onDataChange(p: DataSnapshot) {
+                    val doc = p.getValue(Dokter::class.java)
+                    holder.txtNamaDoc?.text = doc!!.nama + "(${doc!!.spesialis})"
+                    holder.txtRS?.text = doc!!.rs
+                }
+            })
+            holder.clickRelative?.setOnClickListener {
+                val i: Intent = Intent(context, BookDetailActivity::class.java)
+                i.putExtra("duiddet", riw!!.duid)
+                i.putExtra("jamPick", riw!!.jam)
+                i.putExtra("keluh", riw!!.keluhan)
+                i.putExtra("tgl", riw!!.tanggal)
+                i.putExtra("status", "0")
+                context.startActivity(i)
             }
-        })
-        holder.clickRelative?.setOnClickListener {
-            val i: Intent = Intent(context, BookDetailActivity::class.java)
-            i.putExtra("duiddet", riw!!.duid)
-            i.putExtra("jamPick", riw!!.jam)
-            i.putExtra("keluh", riw!!.keluhan)
-            i.putExtra("tgl", riw!!.tanggal)
-            i.putExtra("status", "0")
-            context.startActivity(i)
         }
     }
 

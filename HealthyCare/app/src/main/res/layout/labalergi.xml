@@ -9,35 +9,49 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="405dp"
-        android:layout_height="700dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483"
         app:srcCompat="@drawable/kotak" />
 
+    <TextView
+        android:id="@+id/txtTglAle"
+        android:layout_width="183dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="55dp"
+        android:gravity="center"
+        android:hint="Tanggal Pesan"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+        app:layout_constraintVertical_bias="0.082" />
+
     <Button
-        android:id="@+id/btnbookAlergi"
+        android:id="@+id/btnAlergi"
         android:layout_width="208dp"
         android:layout_height="42dp"
         android:background="@color/tosca"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.89"
+        app:layout_constraintVertical_bias="0.881"
         tools:text="PESAN" />
 
     <ImageView
         android:id="@+id/btnBackLab2"
         android:layout_width="44dp"
         android:layout_height="31dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnbookAlergi"
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlergi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,42 +70,42 @@
         app:layout_constraintVertical_bias="0.138"
         app:srcCompat="@drawable/alergi" />
 
-    <EditText
-        android:id="@+id/txtTanggalLab"
-        android:layout_width="290dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Pilih Tanggal"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
     <TextView
         android:id="@+id/txtJam"
         android:layout_width="204dp"
         android:layout_height="30dp"
+        android:layout_marginBottom="28dp"
         android:text="10.00 - 12.00 WIB"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnbookAlergi"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlergi"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/txtTanggalLab"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="@+id/imageView3" />
 
     <ImageView
         android:id="@+id/imageView14"
         android:layout_width="256dp"
         android:layout_height="190dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnbookAlergi"
+        app:layout_constraintBottom_toTopOf="@+id/btnAlergi"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView11"
-        app:layout_constraintVertical_bias="0.146"
+        app:layout_constraintVertical_bias="0.013"
         app:srcCompat="@drawable/detailcu" />
+
+    <Button
+        android:id="@+id/btnPickDate"
+        android:layout_width="92dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="65dp"
+        android:background="@color/tosca"
+        android:text="@android:string/ok"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/txtJam"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/txtTglAle"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14"
+        app:layout_constraintVertical_bias="0.304" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

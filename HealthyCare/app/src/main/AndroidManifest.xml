@@ -3,7 +3,7 @@
     package="com.applicationproject.HealthyCare">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -13,7 +13,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BookDetailActivity"></activity>
+        <activity android:name=".AlergiActivity"></activity>
+        <activity android:name=".CheckupActivity" />
+        <activity android:name=".BookDetailActivity" />
         <activity android:name=".DokBookDetailActivity" />
         <activity android:name=".SearchDocActivity" />
         <activity android:name=".ProfileActivity" />
