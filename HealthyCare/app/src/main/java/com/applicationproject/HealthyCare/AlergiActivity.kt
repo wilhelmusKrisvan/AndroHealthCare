@@ -14,11 +14,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_book_detail.*
 import kotlinx.android.synthetic.main.labalergi.*
+import java.text.DateFormat
 import java.util.*
 
 class AlergiActivity : AppCompatActivity() {
     lateinit var db: DatabaseReference
     lateinit var dbPesan: DatabaseReference
+    var cal: Calendar = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.labalergi)
@@ -56,7 +58,6 @@ class AlergiActivity : AppCompatActivity() {
             var id: String = intent.getStringExtra("lid")
             btnAlergi.setTextColor(Color.WHITE)
             btnAlergi.setOnClickListener {
-                progressBarPesan.visibility = View.VISIBLE
                 db = FirebaseDatabase.getInstance().getReference("booking")
                 val listener = object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
@@ -67,7 +68,6 @@ class AlergiActivity : AppCompatActivity() {
                             val book = data.getValue(Booking::class.java)
                             if(book!!.jam.toString().equals(jam) && book!!.uid.toString().equals(
                                     FirebaseAuth.getInstance().currentUser!!.uid)){
-                                progressBarPesan.visibility = View.INVISIBLE
                                 Toast.makeText(baseContext, "Booking Tabrakan Dengan Jadwal Anda", Toast.LENGTH_LONG).show()
                             }
                         }
@@ -75,11 +75,10 @@ class AlergiActivity : AppCompatActivity() {
                 }
                 db.addValueEventListener(listener)
                 var buid = UUID.randomUUID().toString()
-                var book = Booking(buid, txttgl.text.toString(), jam,id, nama, FirebaseAuth.getInstance().currentUser?.uid.toString())
+                var book = Booking(buid, DateFormat.getDateInstance().format(cal.time), jam,id, nama, FirebaseAuth.getInstance().currentUser?.uid.toString(),"1")
                 dbPesan = FirebaseDatabase.getInstance().getReference("booking")
                 dbPesan.child(buid).setValue(book)
                     .addOnSuccessListener {
-                        progressBarPesan.visibility = View.INVISIBLE
                         val i: Intent = Intent(baseContext, HomeActivity::class.java)
                         Toast.makeText(baseContext, "Pesanan Anda Telah dibukukan", Toast.LENGTH_LONG).show()
                         startActivity(i)

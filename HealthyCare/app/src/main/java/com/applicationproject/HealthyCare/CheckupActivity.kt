@@ -21,6 +21,7 @@ import java.util.*
 class CheckupActivity : AppCompatActivity() {
     lateinit var db: DatabaseReference
     lateinit var dbPesan: DatabaseReference
+    var cal: Calendar = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.labcheckup)
@@ -75,7 +76,7 @@ class CheckupActivity : AppCompatActivity() {
                 }
                 db.addValueEventListener(listener)
                 var buid = UUID.randomUUID().toString()
-                var book = Booking(buid, txttgl.text.toString(), jam,id, nama, FirebaseAuth.getInstance().currentUser?.uid.toString(),"1")
+                var book = Booking(buid, DateFormat.getDateInstance().format(cal.time), jam,id, nama, FirebaseAuth.getInstance().currentUser?.uid.toString(),"1")
                 dbPesan = FirebaseDatabase.getInstance().getReference("booking")
                 dbPesan.child(buid).setValue(book)
                     .addOnSuccessListener {

@@ -15,6 +15,7 @@ import com.applicationproject.HealthyCare.R
 import com.applicationproject.HealthyCare.model.Booking
 import com.applicationproject.HealthyCare.model.Dokter
 import com.applicationproject.HealthyCare.model.Lab
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.DateFormat
 import java.util.*
@@ -29,65 +30,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 //        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        var list: ArrayList<Booking> = ArrayList<Booking>()
-        var listTampil: ArrayList<Booking> = ArrayList<Booking>()
-        var db:DatabaseReference
-        var dbDoc: DatabaseReference
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val initSet: TextView = root.findViewById(R.id.txtTgl)
         val tgl: TextView = root.findViewById(R.id.txtTgl)
         val nobook: TextView = root.findViewById(R.id.txtNoBook)
         val keluh: TextView = root.findViewById(R.id.txtKeluhLook)
         val nama: TextView = root.findViewById(R.id.txtNamaDok)
         val rs: TextView = root.findViewById(R.id.txtRS)
         checkData()
-        db = FirebaseDatabase.getInstance().getReference("booking")
-
-        val listener = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-            }
-            override fun onDataChange(data: DataSnapshot) {
-                val child = data.children
-                child.forEach {
-                    val book = it.getValue(Booking::class.java)
-                    list.add(book!!)
-                }
-                if(list.size >0 && list.get(0).status.equals("0")){
-                    nobook.text = list.get(0).buid
-                    tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
-                    keluh.text = list.get(0).keluhan
-                    dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${list.get(0).duid}")
-                    dbDoc.addValueEventListener(object : ValueEventListener{
-                        override fun onCancelled(p0: DatabaseError) {
-                        }
-                        override fun onDataChange(p: DataSnapshot) {
-                            val doc = p.getValue(Dokter::class.java)
-                            nama.text= doc!!.nama
-                            rs.text = doc!!.rs
-                        }
-                    })
-                }else if(list.size >0 && list.get(0).status.equals("1") && list.get(0).tanggal.equals(DateFormat.getDateInstance(DateFormat.SHORT).format(Date()))){
-                    nobook.text = list.get(0).buid
-                    tgl.text = list.get(0).tanggal + " jam ${list.get(0).jam}"
-                    keluh.text = list.get(0).keluhan
-                    dbDoc = FirebaseDatabase.getInstance().getReference("lab/${list.get(0).duid}")
-                    dbDoc.addValueEventListener(object : ValueEventListener{
-                        override fun onCancelled(p0: DatabaseError) {
-                        }
-                        override fun onDataChange(p: DataSnapshot) {
-                            val lab = p.getValue(Lab::class.java)
-                            nama.text= lab!!.nama
-                        }
-                    })
-                }else{
-                    val initSet: TextView = root.findViewById(R.id.txtTgl)
-                    initSet.textSize = 30F
-                    initSet.gravity = Gravity.CENTER
-                    initSet.text = "BELUM ADA JADWAL HARI INI"
-                }
-            }
-
-        }
-        db.orderByChild("jam").addValueEventListener(listener)
+        showJadwal(initSet,tgl,nobook,keluh,nama,rs)
 
         val btnDoc: ImageButton = root.findViewById(R.id.btnDokter)
         btnDoc.setOnClickListener {
@@ -103,6 +55,63 @@ class HomeFragment : Fragment() {
 
 
         return root
+    }
+
+    fun showJadwal(initSet:TextView,tgl:TextView,nobook:TextView,keluh:TextView,nama:TextView,rs:TextView){
+        var list: ArrayList<Booking> = ArrayList<Booking>()
+        lateinit var db:DatabaseReference
+        lateinit var dbDoc: DatabaseReference
+        db = FirebaseDatabase.getInstance().getReference("booking")
+        val listener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+            override fun onDataChange(data: DataSnapshot) {
+                val child = data.children
+                child.forEach {
+                    val book = it.getValue(Booking::class.java)
+                    list.add(book!!)
+                }
+                if(list.size > 0){
+                    for(i in 0..list.size-1){
+                        if(list.get(i).status.equals("0") && list.get(i).tanggal.equals(DateFormat.getDateInstance().format(Date())) && list.get(i).uid.equals(FirebaseAuth.getInstance().currentUser!!.uid.toString())){
+                            nobook.text = list.get(i).buid
+                            tgl.text = list.get(i).tanggal + " jam ${list.get(i).jam}"
+                            keluh.text = list.get(i).keluhan
+                            dbDoc = FirebaseDatabase.getInstance().getReference("dokter/${list.get(i).duid}")
+                            dbDoc.addValueEventListener(object : ValueEventListener{
+                                override fun onCancelled(p0: DatabaseError) {
+                                }
+                                override fun onDataChange(p: DataSnapshot) {
+                                    val doc = p.getValue(Dokter::class.java)
+                                    nama.text= doc!!.nama
+                                    rs.text = doc!!.rs
+                                }
+                            })
+                        }else if(list.get(i).status.equals("1") && list.get(i).tanggal.equals(DateFormat.getDateInstance(DateFormat.SHORT).format(Date())) && list.get(i).uid.equals(FirebaseAuth.getInstance().currentUser!!.uid.toString())){
+                            nobook.text = list.get(i).buid
+                            tgl.text = list.get(i).tanggal + " jam ${list.get(i).jam}"
+                            keluh.text = list.get(i).keluhan
+                            dbDoc = FirebaseDatabase.getInstance().getReference("lab/${list.get(i).duid}")
+                            dbDoc.addValueEventListener(object : ValueEventListener{
+                                override fun onCancelled(p0: DatabaseError) {
+                                }
+                                override fun onDataChange(p: DataSnapshot) {
+                                    val lab = p.getValue(Lab::class.java)
+                                    nama.text= lab!!.nama
+                                }
+                            })
+                        }
+                    }
+                }else{
+
+                    initSet.textSize = 30F
+                    initSet.gravity = Gravity.CENTER
+                    initSet.text = "BELUM ADA JADWAL HARI INI"
+                }
+            }
+
+        }
+        db.orderByChild("jam").addValueEventListener(listener)
     }
 
     fun checkData(){
@@ -122,7 +131,7 @@ class HomeFragment : Fragment() {
                         dbRiwayat.child(book.buid).setValue(book)
                         db.child(book.buid).removeValue()
                     }
-                    else if(book!!.jam <= DateFormat.getTimeInstance(DateFormat.SHORT).format(date) && book!!.tanggal<=DateFormat.getDateInstance(DateFormat.SHORT).format(date) && book!!.status.equals("1")){
+                    else if(book!!.tanggal<=DateFormat.getDateInstance(DateFormat.SHORT).format(date) && book!!.status.equals("1") && book!!.jam <= DateFormat.getTimeInstance(DateFormat.SHORT).format(date)){
                         dbRiwayat.child(book.buid).setValue(book)
                         db.child(book.buid).removeValue()
                     }

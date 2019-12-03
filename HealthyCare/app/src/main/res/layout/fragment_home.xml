@@ -74,6 +74,7 @@
                 android:id="@+id/txtTgl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="TIDAK ADA JADWAL HARI INI"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 

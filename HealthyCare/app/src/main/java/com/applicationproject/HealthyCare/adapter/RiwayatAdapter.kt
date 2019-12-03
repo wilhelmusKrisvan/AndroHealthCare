@@ -64,9 +64,9 @@ class RiwayatAdapter(var list : ArrayList<Booking>, val context: Context, var ui
                     i.putExtra("status", riw!!.status)
                     context.startActivity(i)
                 }
-            }else{
+            }else if(riw!!.keluhan.equals("Uji Saring Alergi")){
+                holder.imgRiw?.setImageResource(R.mipmap.lab_foreground)
                 holder.clickRelative?.setOnClickListener {
-                    holder.imgRiw?.setImageResource(R.mipmap.lab_foreground)
                     val i: Intent = Intent(context, AlergiActivity::class.java)
                     i.putExtra("tgl", riw!!.tanggal)
                     i.putExtra("status", riw!!.status)
